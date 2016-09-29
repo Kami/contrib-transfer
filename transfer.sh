@@ -2,6 +2,7 @@
 
 CONTRIB_REPO=https://github.com/StackStorm/st2contrib
 EXCHANGE_ORG=StackStorm-Exchange
+EXCHANGE_PREFIX=stackstorm
 
 echo "Starting pack transfer from st2contrib to StackStorm Exchange"
 echo "============================================================="
@@ -25,7 +26,7 @@ echo
 
 for PACK in `ls`; do
   echo -n "Moving $PACK... "
-  git ls-remote https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$PACK > /dev/null 2>&1
+  git ls-remote https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$EXCHANGE_PREFIX-$PACK > /dev/null 2>&1
   if [ "$?" == 0 ]; then
   	echo "already there."
   	echo
@@ -38,7 +39,7 @@ for PACK in `ls`; do
   cp -R /tmp/st2contrib/. .
 
   git filter-branch --prune-empty --subdirectory-filter packs/$PACK master
-  git remote set-url origin https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$PACK.git
+  git remote set-url origin https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$EXCHANGE_PREFIX-$PACK.git
 
   chmod -R 775 .
   git add -A
