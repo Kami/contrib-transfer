@@ -31,7 +31,7 @@ echo
 
 for PACK in `ls`; do
   echo -n "Moving $PACK... "
-  if git ls-remote https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$EXCHANGE_PREFIX$PACK > /dev/null 2>&1
+  if git ls-remote https://$USERNAME:$PASSWORD@github.com/$EXCHANGE_ORG/$EXCHANGE_PREFIX-$PACK > /dev/null 2>&1
   then
   	echo "already there."
   	echo
